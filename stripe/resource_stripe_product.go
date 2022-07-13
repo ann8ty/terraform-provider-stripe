@@ -71,10 +71,10 @@ func resourceStripeProduct() *schema.Resource {
 					"Non-ASCII characters are automatically stripped. It must contain at least one letter.",
 			},
 			"tax_code": {
-				Type:     schema.TypeString,
-				Optional: true,
+				Type:        schema.TypeString,
+				Optional:    true,
 				Description: "A tax code ID.",
-			}
+			},
 			"unit_label": {
 				Type:     schema.TypeString,
 				Optional: true,
@@ -169,7 +169,7 @@ func resourceStripeProductCreate(ctx context.Context, d *schema.ResourceData, m 
 	if statementDescriptor, set := d.GetOk("statement_descriptor"); set {
 		params.StatementDescriptor = stripe.String(ToString(statementDescriptor))
 	}
-	if statementDescriptor, set := d.GetOk("tax_code"); set {
+	if taxCode, set := d.GetOk("tax_code"); set {
 		params.TaxCode = stripe.String(ToString(taxCode))
 	}
 	if unitLabel, set := d.GetOk("unit_label"); set {
